@@ -33,7 +33,7 @@ jobs:
     - name: build and push docker image 
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
-        image: raitmodified-ubuntu:v1
+        image: tanvisable/raitmodified-ubuntu
         registry: docker.io
         dockerfile: Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
@@ -47,7 +47,7 @@ jobs:
       uses: fifsky/ssh-action@master
       with:
          command: |
-              docker run -d -p 8082:3000 --name tanvinodejscontainer raitmodified-ubuntu
+              docker run -d -p 8082:3000 --name tanvinodejscontainer tanvisable/raitmodified-ubuntu
               host: 18.191.130.88
               user: ubuntu
               key: ${{ secrets.SSH_KEY }}
