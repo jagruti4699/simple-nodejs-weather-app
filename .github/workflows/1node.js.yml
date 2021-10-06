@@ -30,15 +30,16 @@ jobs:
     - run: npm run build --if-present
     
     
-    - name: build and push docker image 
-      uses: mr-smithers-excellent/docker-build-push@v5
+    - name: build docker image
+      run: docker build . --file Dockerfile --tag 123:$(date +%s)
+    - name: push image to dockerhub
+      uses: docker/build-push-action@v1
       with:
-        image: tanvisable/123
-        tags: v1, latest
-        registry: docker.io
-        dockerfile: Dockerfile
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+          username: tanvisable
+          password: Hargag@17
+          repository: tanvisable/123
+          tags: latest
+
         
       
 
