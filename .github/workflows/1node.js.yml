@@ -31,13 +31,13 @@ jobs:
     
     
     - name: build docker image
-      run: docker build . --file Dockerfile --tag 123:$(date +%s)
+      run: docker build . --file Dockerfile --tag image2:$(date +%s)
     - name: push image to dockerhub
       uses: docker/build-push-action@v1
       with:
-          username: tanvisable
-          password: Hargag@17
-          repository: tanvisable/123
+          username: 46990406
+          password: 04june1999
+          repository: 46990406/image2
           tags: latest
 
         
@@ -49,9 +49,10 @@ jobs:
       uses: fifsky/ssh-action@master
       with:
          command: |
-              docker run -d -p 8082:3000 --name tanvinodejscontainer tanvisable/123
-         host: 18.191.130.88
+              docker run -d -p 8082:3000 --name nodejscontainer 46990406/image2
+         host: 65.2.40.11
          user: ubuntu
          key: ${{ secrets.SSH_KEY }}
          port: 22
    
+
