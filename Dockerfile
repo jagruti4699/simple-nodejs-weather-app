@@ -6,6 +6,6 @@ EXPOSE 3000
 CMD ["node","server.js"]
 
 
-FROM nginx
+RUN apt install nginx
 COPY ./default.conf /etc/nginx/conf.d/
 EXPOSE 80
