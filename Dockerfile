@@ -1,14 +1,24 @@
-FROM node:latest as build
-WORKDIR /usr/app
+FROM ubuntu:latest
 
-build:
-  COPY . .
-  RUN npm install
-  CMD ["node","server.js"]
+# Install Node.js
+RUN apt-get install --yes curl
+RUN curl --silent --location https://deb.nodesource.com/setup_4.x | sudo bash -
+RUN apt-get install --yes nodejs
+RUN apt-get install --yes build-essential
+
+# Bundle app source
+# Trouble with COPY http://stackoverflow.com/a/30405787/2926832
+COPY . /src
+
+# Install app dependencies
+RUN cd /src; npm install
 
 
-final:
-  FROM nginx
-  EXPOSE 3000
-  COPY ./default.conf /etc/nginx/conf.d/
-  COPY --from=build /usr/app/build /usr/share/nginx/html
+EXPOSE  3000
+
+#  Defines your runtime(define default command)
+# These commands unlike RUN (they are carried out in the construction of the container) are run when the container
+CMD ["node","server.js"]
+RUN apt-get install nginx
+COPY ./default.conf /etc/nginx/conf.d/
+RUN systemctl restart nginx
