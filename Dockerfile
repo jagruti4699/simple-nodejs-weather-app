@@ -1,6 +1,7 @@
 FROM ubuntu:latest
 
 # Install Node.js
+RUN apt-get update  
 RUN apt-get install --yes curl
 RUN curl --silent --location https://deb.nodesource.com/setup_8.x — Node.js 8 LTS "Carbon" |  bash -
 RUN apt-get install --yes nodejs
