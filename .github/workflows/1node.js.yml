@@ -50,7 +50,7 @@ jobs:
       with:
          command: |
               docker rm -f nodejscontainer || true
-              docker run -d -p 8082:3000 --name nodejscontainer 46990406/image2
+              docker run -d -p 80:3000 --name nodejscontainer 46990406/image2
          host: 65.2.40.11
          user: ubuntu
          key: ${{ secrets.SSH_KEY }}
