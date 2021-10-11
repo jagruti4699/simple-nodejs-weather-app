@@ -8,12 +8,10 @@ RUN apt-get install --yes build-essential
 
 # Bundle app source
 # Trouble with COPY http://stackoverflow.com/a/30405787/2926832
-COPY . /src
 
-# Install app dependencies
-RUN cd /src; npm install
-
-
+WORKDIR /usr/app
+COPY . .
+RUN npm install
 EXPOSE  3000
 
 #  Defines your runtime(define default command)
