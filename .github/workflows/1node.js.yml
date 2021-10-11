@@ -31,7 +31,7 @@ jobs:
     
     
     - name: build docker image
-      run: docker build . --file Dockerfile --tag image2:$(date +%s)
+      run: docker-compose -f "docker-compose.yml" up -d --build
     - name: push image to dockerhub
       uses: docker/build-push-action@v1
       with:
@@ -52,12 +52,7 @@ jobs:
                docker rm -f nodejscontainer || true
                docker run -d -p 80:3000 --name nodejscontainer 46990406/image2
                docker stop nodejscontainer
-           
-
-      
-    - name: Build the docker-compose stack
-      uses: actions/checkout@v1
-      run: docker-compose up -d
+   
 
             
          host: 65.2.40.11
